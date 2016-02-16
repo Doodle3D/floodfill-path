@@ -6,7 +6,8 @@ var floodFill = require('n-dimensional-flood-fill');
 
 module.exports = function (options) {
   var noop = function () {};
-  var islandThreshold = options.islandThreshold || 10;
+  var islandThreshold = options.islandThreshold;
+  if(islandThreshold === undefined) islandThreshold = 10;
   var onBoundary = options.onBoundary || noop;
   var boundaries = [];
   var prevBoundary = [];

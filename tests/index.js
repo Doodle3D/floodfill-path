@@ -125,9 +125,8 @@ test.only('pixel data with hole', (assert) => {
     var path = floodFillPath({
       getter: getter,
       seed: seed,
-      islandThreshold: 0,
+      islandThreshold: 3,
       onBoundary: function(x, y) {
-          console.log('onBoundary');
           boundariesTest[y][x] = 2;
       }
     });
