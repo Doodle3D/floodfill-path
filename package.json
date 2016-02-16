@@ -1,0 +1,18 @@
+{
+  "name": "floodfill-path",
+  "version": "0.0.1",
+  "description": "Floodfill path generator, largely inspired by the PancakePainter fill tool",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Peter Uithoven @ Doodle3D",
+  "license": "MIT",
+  "dependencies": {
+    "n-dimensional-flood-fill": "^1.0.0"
+  },
+  "devDependencies": {
+    "debug": "^2.2.0",
+    "tape": "^4.4.0"
+  }
+}
