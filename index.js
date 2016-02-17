@@ -30,6 +30,12 @@ module.exports = function (options) {
   // Convert the list of fill boundary points into an array of paths.
   // If you're filling a face, everything within it will be a new path,
   var paths = distanceSort(result.boundaries, islandThreshold);
+
+  // Filter out too small shapes (paths with 2 or less points)
+  paths = filter(paths);
+
+  // Sort paths so the outer line is first
+  paths = outerLineFirst(paths);
   console.log('paths: ', paths);
 
   return paths;
@@ -96,4 +102,36 @@ function getFillStartID(points) {
   });
 
   return bestID;
+}
+
+function filter(paths) {
+  return paths.filter(function (path) {
+    return path.length > 2;
+  });
+}
+
+function outerLineFirst(paths) {
+  if (paths.length === 1) return paths;
+
+  var minY = Infinity;
+  var index;
+
+  for (var i = 0; i < paths.length; i++) {
+    var path = paths[i];
+    for (var j = 0; j < path.length; j++) {
+      var y = path[j][1];
+
+      if (y < minY) {
+        minY = y;
+        index = i;
+      }
+    }
+  }
+
+  if (index === 0) return paths;
+
+  var outerLine = paths.splice(index, 1)[0];
+  paths.splice(0, 0, outerLine);
+
+  return paths;
 }
